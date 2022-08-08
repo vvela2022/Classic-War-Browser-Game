@@ -9,9 +9,12 @@
     justify-content: space-around;
 }
 
-.computer-space, .player-space {
+.computer-space, .player-space, .computer-war, .player-war {
     display: flex;
     align-items: center;
+    width: 500px;
+    height:150px;
+    border: 2px solid peru;
 }
 
 .deck, .face-up {
@@ -29,7 +32,12 @@
     background-color: lightcyan;
 }
 
-
+.hidden-card, .hidden-display {
+    height: 120px;
+    width: 100px;
+    border: 2px solid black;
+    margin: 10px;
+}
 
 .player-info {
     margin-left: 40px;

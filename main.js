@@ -34,10 +34,7 @@ let cardTally = document.querySelectorAll('.card-count')
 //populating master deck variable
 
 let cardTypes = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-
 let suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
-
-let startingHand = []
 
 //these lines created my master deck
 function createDeck() {
@@ -87,19 +84,13 @@ function gameTurn() {
             player.deck.push(itemWon)
             let sendEnd = player.deck.splice(0, 1)
             player.deck.push(sendEnd)
-            console.log(itemWon)
         } else if(computer.deck [0][0] === player.deck[0][0]) {
-            let itemWon = player.deck.splice(0, 1)//currently giving ties to computer - will change later
-            computer.deck.push(itemWon)
-            let sendEnd = computer.deck.splice(0, 1)//will adjust this so that the correct winner get shuffles the card
-            computer.deck.push(sendEnd)
-            console.log(itemWon)
+            console.log('tie')
         } else {
             let itemWon = player.deck.splice(0, 1)
             computer.deck.push(itemWon)
             let sendEnd = computer.deck.splice(0, 1)
             computer.deck.push(sendEnd)
-            console.log(itemWon)
         }
         player.cardCount = player.deck.length
         computer.cardCount = computer.deck.length
