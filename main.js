@@ -19,14 +19,25 @@ const player = {
 const computer = {
     name: 'Computer',
     deck: [],
-    cardCount: 26
+    cardCount: 26//use deck.length to update this amount
 }
 
+//DOM Elements below (what needs to be accessed/updated for user)
+let playerDeck = document.querySelector('#player-deck')
+let playerDisplay = document.querySelector('#player-display')
+let computerDeck = document.querySelector('#computer-deck')
+let computerDisplay = document.querySelector('#computer-display')
+let resetButton = document.querySelector('button')
+
+
 //populating master deck variable
-let cardTypes = ['Ace', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King']
+let cardTypes = ['Ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King']
 
 let suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
 
+let startingHand = []
+
+//these lines created my master deck
 function createDeck(cardTypes, suits) {
     for(let i = 0; i < cardTypes.length; i++) {
         for(let j = 0; j < suits.length; j++) {
@@ -44,9 +55,18 @@ function deckShuffle(deck) {
 }
 
 deckShuffle(masterDeck)
+console.log(masterDeck)
 
-//these lines will populate my gameboard
-//function gameSetup()
-console.log(player.deck)
+//these lines will distributes 26 cards to each player
+function divyCards () {
+    player.deck = masterDeck.splice(0, 26)
+    computer.deck = masterDeck.splice(0,26)
+}
 
-//create turns
+divyCards()
+
+
+//these lines will add functionality to the deck elemtents
+
+
+//create turns - make sure to account for tie condition
