@@ -1,0 +1,19 @@
+/*War Card Game 
+Game begins with players 1 and 2 with half of a 52 card deck on the board
+Player 1 draws a card and displays it face up 
+other players card is shown
+Cards are compared and higher card holder receives card
+Both players card counts are updated with number of cards
+Process repeats until one player has no cards remaining
+Player with 52 cards will be declared the winner
+Player with 0 cards left will be lose
+
+Things to track:
+The cards in each players hand
+The  number of cards in each players hand(include update player card count in turn()function)
+
+
+Additional thoughts:
+Reset button that resets the game to original state
+
+*/
