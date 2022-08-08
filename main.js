@@ -29,6 +29,10 @@ let computerDeck = document.querySelector('#computer-deck')
 let computerDisplay = document.querySelector('#computer-display')
 let resetButton = document.querySelector('button')
 let cardTally = document.querySelectorAll('.card-count')
+let warCHide = document.querySelector('#computer-hidden')
+let warCDisp = document.querySelector('#computer-war-display')//could I make these lines better? Loop to assign values?
+let warPHide = document.querySelector('#player-hidden')
+let warPDisp = document.querySelector('#player-war-display')
 
 
 //populating master deck variable
@@ -86,6 +90,21 @@ function gameTurn() {
             player.deck.push(sendEnd)
         } else if(computer.deck [0][0] === player.deck[0][0]) {
             console.log('tie')
+            warCHide.innerText = computer.deck[1]
+            warCDisp.innerText = computer.deck[2]
+            warPHide.innerText = player.deck[1]
+            warPDisp.innerText = player.deck[2]
+            if(computer.deck[2][0] > player.deck[2][0]) {
+                let warWin = player.deck.splice(0, 3)
+                computer.deck.push(warWin)
+                let sendEnd = computer.deck.splice(0, 3)
+                computer.deck.push(sendEnd)//refactor - tie condition is missing cards when performed -- something to do with splice or push??
+            } else {
+                let warWin = computer.deck.splice(0, 3)
+                player.deck.push(warWin)
+                let sendEnd = player.deck.splice(0, 3)
+                player.deck.push(sendEnd)
+            }
         } else {
             let itemWon = player.deck.splice(0, 1)
             computer.deck.push(itemWon)
@@ -96,8 +115,10 @@ function gameTurn() {
         computer.cardCount = computer.deck.length
         cardTally[0].innerText = `Card Count: ${computer.cardCount}`
         cardTally[1].innerText = `Card Count: ${player.cardCount}`
-        console.log(computer.cardCount)  
-        console.log(player.cardCount)
+        console.log(`Computer: ${computer.cardCount}`)  
+        console.log(`Player: ${player.cardCount}`)
+        console.log(computer.deck)
+        console.log(player.deck)
         if (player.cardCount === 0) {
             alert('Sorry, you lose!') 
             document.addEventListener('click', function () {
