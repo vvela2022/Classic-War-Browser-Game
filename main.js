@@ -32,9 +32,7 @@ let resetButton = document.querySelector('button')
 
 //populating master deck variable
 
-let cardValue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-
-let cardTypes = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King', 'Ace']
+let cardTypes = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 
 let suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
 
@@ -82,12 +80,44 @@ function gameTurn() {
         if(player.deck[0][0] > computer.deck[0][0]) {
             let itemWon = computer.deck.splice(0, 1)
             player.deck.push(itemWon)
-        } //write logic for else if statement (if computer has higher index what to do..provide additional direction for Jack, Queen, King, Ace)
+            let sendEnd = player.deck.splice(0, 1)
+            player.deck.push(sendEnd)
+            console.log(itemWon)
+        } else if(computer.deck [0][0] === player.deck[0][0]) {
+            let itemWon = player.deck.splice(0, 1)//currently giving ties to computer - will change later
+            computer.deck.push(itemWon)
+            let sendEnd = computer.deck.splice(0, 1)//will adjust this so that the correct winner get shuffles the card
+            computer.deck.push(sendEnd)
+            console.log(itemWon)
+        } else {
+            let itemWon = player.deck.splice(0, 1)
+            computer.deck.push(itemWon)
+            let sendEnd = computer.deck.splice(0, 1)
+            computer.deck.push(sendEnd)
+            console.log(itemWon)
+        }
+        player.cardCount = player.deck.length
+        computer.cardCount = computer.deck.length
+        console.log(computer.cardCount)  
+        console.log(player.cardCount)
+        if (player.cardCount === 0) {
+            alert('Sorry, you lose!') 
+            document.addEventListener('click', function () {
+               location.reload() 
+            })
+        } else if (computer.cardCount === 0) {
+            alert('You win!!')
+            document.addEventListener('click', function() {
+                location.reload()
+            })
+        }
     })
 }
   
 gameTurn()
-console.log(player.deck)
-console.log(computer.deck)
 
-//create turns - make sure to account for tie condition
+//add functionality to reset button
+//change alerts to appending the gameboard
+//build in war logic (tie)
+//build in functionality to automatically reset after game is over
+//add images
