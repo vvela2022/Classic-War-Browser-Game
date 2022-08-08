@@ -31,23 +31,30 @@ let resetButton = document.querySelector('button')
 
 
 //populating master deck variable
-let cardTypes = ['Ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King']
+
+let cardValue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+
+let cardTypes = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King', 'Ace']
 
 let suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
 
 let startingHand = []
 
 //these lines created my master deck
-function createDeck(cardTypes, suits) {
+function createDeck() {
     for(let i = 0; i < cardTypes.length; i++) {
         for(let j = 0; j < suits.length; j++) {
-            masterDeck.push([cardTypes[i], suits[j]]) 
-        } 
-    }
+        masterDeck.push([cardTypes[i], suits[j]]) 
+        }
+    } 
     return masterDeck
 }
 
-createDeck(cardTypes, suits)
+createDeck()
+
+//console.log(masterDeck)
+
+
 
 //this shuffles my master deck
 function deckShuffle(deck) {
@@ -72,11 +79,10 @@ function gameTurn() {
     playerDeck.addEventListener('click', function () {
         playerDisplay.innerText = player.deck[0]
         computerDisplay.innerText = computer.deck[0]
-        if(player.deck[0] > computer.deck[0]) {
-            let cardWon = computer.deck[0]
-            player.deck.push(cardWon)
-            computer.deck.splice(0,1)
-        }
+        if(player.deck[0][0] > computer.deck[0][0]) {
+            let itemWon = computer.deck.splice(0, 1)
+            player.deck.push(itemWon)
+        } //write logic for else if statement (if computer has higher index what to do..provide additional direction for Jack, Queen, King, Ace)
     })
 }
   
