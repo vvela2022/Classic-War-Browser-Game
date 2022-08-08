@@ -55,7 +55,6 @@ function deckShuffle(deck) {
 }
 
 deckShuffle(masterDeck)
-console.log(masterDeck)
 
 //these lines will distributes 26 cards to each player
 function divyCards () {
@@ -65,8 +64,24 @@ function divyCards () {
 
 divyCards()
 
-
 //these lines will add functionality to the deck elemtents
+//make sure that the values that are being pushed are being stored correctly
+//modify funcion to be able to compare the values of the cards
 
+function gameTurn() {
+    playerDeck.addEventListener('click', function () {
+        playerDisplay.innerText = player.deck[0]
+        computerDisplay.innerText = computer.deck[0]
+        if(player.deck[0] > computer.deck[0]) {
+            let cardWon = computer.deck[0]
+            player.deck.push(cardWon)
+            computer.deck.splice(0,1)
+        }
+    })
+}
+  
+gameTurn()
+console.log(player.deck)
+console.log(computer.deck)
 
 //create turns - make sure to account for tie condition
