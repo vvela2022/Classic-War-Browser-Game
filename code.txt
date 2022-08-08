@@ -4,6 +4,7 @@ Player 1 draws a card and displays it face up
 other players card is shown
 Cards are compared and higher card holder receives card
 Both players card counts are updated with number of cards
+***If players tie a hand, they need to lay down one card face down and one face up. The player with the higher cards takes both piles**
 Process repeats until one player has no cards remaining
 Player with 52 cards will be declared the winner
 Player with 0 cards left will be lose
