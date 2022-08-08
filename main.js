@@ -28,6 +28,7 @@ let playerDisplay = document.querySelector('#player-display')
 let computerDeck = document.querySelector('#computer-deck')
 let computerDisplay = document.querySelector('#computer-display')
 let resetButton = document.querySelector('button')
+let cardTally = document.querySelectorAll('.card-count')
 
 
 //populating master deck variable
@@ -52,6 +53,10 @@ createDeck()
 
 //console.log(masterDeck)
 
+//this activates my reset button
+resetButton.addEventListener('click', function () {
+    location.reload()
+})
 
 
 //this shuffles my master deck
@@ -98,6 +103,8 @@ function gameTurn() {
         }
         player.cardCount = player.deck.length
         computer.cardCount = computer.deck.length
+        cardTally[0].innerText = `Card Count: ${computer.cardCount}`
+        cardTally[1].innerText = `Card Count: ${player.cardCount}`
         console.log(computer.cardCount)  
         console.log(player.cardCount)
         if (player.cardCount === 0) {
