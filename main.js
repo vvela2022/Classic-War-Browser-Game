@@ -85,9 +85,9 @@ function gameTurn() {
         computerDisplay.innerText = computer.deck[0]
         if(player.deck[0][0] > computer.deck[0][0]) {
             let itemWon = computer.deck.splice(0, 1)
-            player.deck.push(itemWon)
+            player.deck.push(itemWon[0])//splice returns an array, so you need to reference the 0 index of the array
             let sendEnd = player.deck.splice(0, 1)
-            player.deck.push(sendEnd)
+            player.deck.push(sendEnd[0])
         } else if(computer.deck [0][0] === player.deck[0][0]) {
             console.log('tie')
             warCHide.innerText = computer.deck[1]
@@ -95,21 +95,31 @@ function gameTurn() {
             warPHide.innerText = player.deck[1]
             warPDisp.innerText = player.deck[2]
             if(computer.deck[2][0] > player.deck[2][0]) {
+                console.log('computer won hand')
                 let warWin = player.deck.splice(0, 3)
-                computer.deck.push(warWin)
+                for(let i = 0; i < warWin.length; i++) {
+                    computer.deck.push(warWin[i])
+                }
                 let sendEnd = computer.deck.splice(0, 3)
-                computer.deck.push(sendEnd)//refactor - tie condition is missing cards when performed -- something to do with splice or push??
+                for (let j = 0; j < sendEnd.length; j++) {
+                    computer.deck.push(sendEnd[j])
+                }
             } else {
+                console.log('player won hand')
                 let warWin = computer.deck.splice(0, 3)
-                player.deck.push(warWin)
+                for(let i = 0; i < warWin.length; i++) {
+                    computer.deck.push(warWin[i])
+                }
                 let sendEnd = player.deck.splice(0, 3)
-                player.deck.push(sendEnd)
+                for (let j = 0; j < sendEnd.length; j++) {
+                    computer.deck.push(sendEnd[j])
+                }//build in additional logic for 2 or more ties
             }
         } else {
             let itemWon = player.deck.splice(0, 1)
-            computer.deck.push(itemWon)
+            computer.deck.push(itemWon[0])
             let sendEnd = computer.deck.splice(0, 1)
-            computer.deck.push(sendEnd)
+            computer.deck.push(sendEnd[0])
         }
         player.cardCount = player.deck.length
         computer.cardCount = computer.deck.length
