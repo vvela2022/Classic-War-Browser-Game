@@ -33,18 +33,11 @@ let warCHide = document.querySelector('#computer-hidden')
 let warCDisp = document.querySelector('#computer-war-display')//could I make these lines better? Loop to assign values?
 let warPHide = document.querySelector('#player-hidden')
 let warPDisp = document.querySelector('#player-war-display')
-
-
+const hTag = document.querySelector('h1')
 //populating master deck variable
 
-let cardTypes = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King', 'Ace']
+let cardTypes = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 let suits = ['♥️', '♦️', '♣️', '♠️']//either replace w/ images or add image URLs to suits  
-
-//adust this to display the back of a deck
-// let cardImages = document.createElement('img')
-// cardImages.setAttribute('src', 'https://i.imgur.com/ZLbEUDp.png?1')
-// cardImages.setAttribute('data-id', 14)
-// playerDeck.appendChild(cardImages)
 
 
 //these lines created my master deck
@@ -83,25 +76,15 @@ divyCards()
 
 //these lines will add functionality to the deck elemtents
 //modify funcion to be able to compare the values of the cards
-function checkValues (array) {
-    if(array === 'Ace') {
-        array = 14
-    } else if (array === 'King') {
-        array = 13
-    } else if (array === 'Queen') {
-        array = 12
-    } else if (array === 'Jack') {
-        array = 11
-    }
-}
+
+
+
 
 function gameTurn() {
     playerDeck.addEventListener('click', function () {
         playerDisplay.innerText = player.deck[0]
         computerDisplay.innerText = computer.deck[0]
         let gameCondition = 'normal'
-        checkValues(player.deck[0][0])
-        checkValues(computer.deck[0][0])
         if(player.deck[0][0] > computer.deck[0][0]) {
             let itemWon = computer.deck.splice(0, 1)
             player.deck.push(itemWon[0])//splice returns an array, so you need to reference the 0 index of the array
@@ -110,14 +93,10 @@ function gameTurn() {
         } else if(computer.deck [0][0] === player.deck[0][0]) {
             gameCondition = 'War'
             console.log('tie')
-                warCHide.innerText = computer.deck[1]
-                warCDisp.innerText = computer.deck[2]
-                warPHide.innerText = player.deck[1]
-                warPDisp.innerText = player.deck[2]
-                checkValues(player.deck[2][0])
-                checkValues(computer.deck[2][0])    
+            initiateWar()
             if(computer.deck[2][0] > player.deck[2][0]) {
                 console.log('computer won hand')
+                
                 let warWin = player.deck.splice(0, 3)
                 for(let i = 0; i < warWin.length; i++) {
                     computer.deck.push(warWin[i])
@@ -126,7 +105,9 @@ function gameTurn() {
                 for (let j = 0; j < sendEnd.length; j++) {
                     computer.deck.push(sendEnd[j])
                 }
+                clearWar()
             } else if (computer.deck[2][0] === player.deck[2][0]) {
+                initiateWar()
                 if(computer.deck[4][0] > player.deck[4][0]) {
                     console.log('computer won hand')
                     let warWin = player.deck.splice(0,5)
@@ -148,6 +129,7 @@ function gameTurn() {
                         player.deck.push(warWin[j])
                     }
                 }
+                clearWar()
             } else {
                 console.log('player won hand')
                 let warWin = computer.deck.splice(0, 3)
@@ -159,13 +141,7 @@ function gameTurn() {
                     player.deck.push(sendEnd[j])
                 }//build in additional logic for 2 or more ties
             }
-            //these lines are overriding tie cards from showing up
-            // playerDeck.addEventListener('click', function () {
-            // warCHide.innerText = ""
-            // warCDisp.innerText = ""
-            // warPHide.innerText = ""
-            // warPDisp.innerText = ""
-            // })
+            clearWar()
         } else {
             let itemWon = player.deck.splice(0, 1)
             computer.deck.push(itemWon[0])
@@ -179,31 +155,46 @@ function gameTurn() {
         console.log(`Computer: ${computer.cardCount}`)  
         console.log(`Player: ${player.cardCount}`)
         console.log(gameCondition)
-        console.log(player.deck[0])
-        console.log(computer.deck[0])
         if (player.cardCount === 0) {
-            alert('Sorry, you lose!') 
-            document.addEventListener('click', function () {
-               location.reload() 
-            })
+            //alert('Sorry, you lose!') 
+            hTag.innerText = 'Sorry, you lose!!'
+            // document.addEventListener('click', function () {
+            //    location.reload() 
+            // })
         } else if (computer.cardCount === 0) {
-            alert('You win!!')
-            document.addEventListener('click', function() {
-                location.reload()
-            })
+            //alert('You win!!')
+            hTag.innerText = 'You win!!'
+            
+            // document.addEventListener('click', function() {
+            //     location.reload()
+            // })
         } else if(gameCondition ==='war' && player.cardCount < 3) {
-            alert('Sorry, you don\'t have enough cards to continue, you lose!')
+            hTag.innerText = 'Sorry, you don\'t have enough cards to continue, you lose.'
+            // alert('Sorry, you don\'t have enough cards to continue, you lose!')
         } else if(gameCondition === 'war' && computer.cardCount < 3) {
-            alert('The computer does not have enough cards to continue, you win!!'
-            )
+            hTag.innerText = 'The computer does not have enough cards to continue, you win!!'
+            // alert('The computer does not have enough cards to continue, you win!!'
+            // )
         } 
     })
 }
   
 gameTurn()
 
-//add functionality to reset button
-//change alerts to appending the gameboard
-//build in war logic (tie)
+function initiateWar() {
+    warCHide.style.backgroundColor = 'lightsteelblue'
+    warCDisp.innerText = computer.deck[2]
+    warPHide.style.backgroundColor = 'lightsteelblue'
+    warPDisp.innerText = player.deck[2]
+}
+
+function clearWar() {
+    playerDeck.addEventListener('click', function () {
+        warCHide.innerText = ""
+        warCDisp.innerText = ""
+        warPHide.innerText = ""
+        warPDisp.innerText = ""
+    }) 
+}
+
 //build in functionality to automatically reset after game is over
-//add images

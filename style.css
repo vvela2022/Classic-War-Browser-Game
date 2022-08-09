@@ -9,6 +9,10 @@
     justify-content: space-around;
 }
 
+h1 {
+    color: white;
+}
+
 .computer-space, .player-space, .computer-war, .player-war {
     display: flex;
     align-items: center;
