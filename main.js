@@ -76,7 +76,6 @@ function divyCards () {
 divyCards()
 
 //these lines will add functionality to the deck elemtents
-//make sure that the values that are being pushed are being stored correctly
 //modify funcion to be able to compare the values of the cards
 
 function gameTurn() {
@@ -108,13 +107,19 @@ function gameTurn() {
                 console.log('player won hand')
                 let warWin = computer.deck.splice(0, 3)
                 for(let i = 0; i < warWin.length; i++) {
-                    computer.deck.push(warWin[i])
+                    player.deck.push(warWin[i])
                 }
                 let sendEnd = player.deck.splice(0, 3)
                 for (let j = 0; j < sendEnd.length; j++) {
-                    computer.deck.push(sendEnd[j])
+                    player.deck.push(sendEnd[j])
                 }//build in additional logic for 2 or more ties
             }
+            playerDeck.addEventListener('click', function () {
+            warCHide.innerText = ""
+            warCDisp.innerText = ""
+            warPHide.innerText = ""
+            warPDisp.innerText = ""
+            })
         } else {
             let itemWon = player.deck.splice(0, 1)
             computer.deck.push(itemWon[0])

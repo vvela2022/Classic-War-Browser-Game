@@ -35,7 +35,6 @@
 .hidden-card, .hidden-display {
     height: 120px;
     width: 100px;
-    border: 2px solid black;
     margin: 10px;
 }
 
