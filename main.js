@@ -23,7 +23,7 @@ const computer = {
 }
 
 //DOM Elements below (what needs to be accessed/updated for user)
-let playerDeck = document.querySelector('#player-deck')
+let playerDeck = document.querySelector('#player-deck')//chain style to end of this element .style
 let playerDisplay = document.querySelector('#player-display')
 let computerDeck = document.querySelector('#computer-deck')
 let computerDisplay = document.querySelector('#computer-display')
@@ -37,8 +37,15 @@ let warPDisp = document.querySelector('#player-war-display')
 
 //populating master deck variable
 
-let cardTypes = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-let suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
+let cardTypes = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King', 'Ace']
+let suits = ['♥️', '♦️', '♣️', '♠️']//either replace w/ images or add image URLs to suits  
+
+//adust this to display the back of a deck
+// let cardImages = document.createElement('img')
+// cardImages.setAttribute('src', 'https://i.imgur.com/ZLbEUDp.png?1')
+// cardImages.setAttribute('data-id', 14)
+// playerDeck.appendChild(cardImages)
+
 
 //these lines created my master deck
 function createDeck() {
@@ -51,8 +58,6 @@ function createDeck() {
 }
 
 createDeck()
-
-//console.log(masterDeck)
 
 //this activates my reset button
 resetButton.addEventListener('click', function () {
@@ -67,6 +72,7 @@ function deckShuffle(deck) {
 
 deckShuffle(masterDeck)
 
+
 //these lines will distributes 26 cards to each player
 function divyCards () {
     player.deck = masterDeck.splice(0, 26)
@@ -77,14 +83,25 @@ divyCards()
 
 //these lines will add functionality to the deck elemtents
 //modify funcion to be able to compare the values of the cards
-
-
+function checkValues (array) {
+    if(array === 'Ace') {
+        array = 14
+    } else if (array === 'King') {
+        array = 13
+    } else if (array === 'Queen') {
+        array = 12
+    } else if (array === 'Jack') {
+        array = 11
+    }
+}
 
 function gameTurn() {
     playerDeck.addEventListener('click', function () {
-        let gameCondition = 'normal'
         playerDisplay.innerText = player.deck[0]
         computerDisplay.innerText = computer.deck[0]
+        let gameCondition = 'normal'
+        checkValues(player.deck[0][0])
+        checkValues(computer.deck[0][0])
         if(player.deck[0][0] > computer.deck[0][0]) {
             let itemWon = computer.deck.splice(0, 1)
             player.deck.push(itemWon[0])//splice returns an array, so you need to reference the 0 index of the array
@@ -96,7 +113,9 @@ function gameTurn() {
                 warCHide.innerText = computer.deck[1]
                 warCDisp.innerText = computer.deck[2]
                 warPHide.innerText = player.deck[1]
-                warPDisp.innerText = player.deck[2]    
+                warPDisp.innerText = player.deck[2]
+                checkValues(player.deck[2][0])
+                checkValues(computer.deck[2][0])    
             if(computer.deck[2][0] > player.deck[2][0]) {
                 console.log('computer won hand')
                 let warWin = player.deck.splice(0, 3)
@@ -160,6 +179,8 @@ function gameTurn() {
         console.log(`Computer: ${computer.cardCount}`)  
         console.log(`Player: ${player.cardCount}`)
         console.log(gameCondition)
+        console.log(player.deck[0])
+        console.log(computer.deck[0])
         if (player.cardCount === 0) {
             alert('Sorry, you lose!') 
             document.addEventListener('click', function () {
@@ -170,9 +191,9 @@ function gameTurn() {
             document.addEventListener('click', function() {
                 location.reload()
             })
-        } else if(gameCondition ==='war' && player.cardCount < 2) {
+        } else if(gameCondition ==='war' && player.cardCount < 3) {
             alert('Sorry, you don\'t have enough cards to continue, you lose!')
-        } else if(gameCondition === 'war' && computer.cardCount < 2) {
+        } else if(gameCondition === 'war' && computer.cardCount < 3) {
             alert('The computer does not have enough cards to continue, you win!!'
             )
         } 

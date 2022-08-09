@@ -1,5 +1,5 @@
 .gameboard {
-    height: 1000px;
+    height: 750px;
     max-width: 1000px;
     background-color: darkgreen;
     display: flex;
