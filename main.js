@@ -81,13 +81,11 @@ divyCards()
 
 
 function gameTurn() {
-    let gameCondition = 'normal'
-  
     playerDeck.addEventListener('click', function () {
+        let gameCondition = 'normal'
         playerDisplay.innerText = player.deck[0]
         computerDisplay.innerText = computer.deck[0]
         if(player.deck[0][0] > computer.deck[0][0]) {
-            gameCondition = 'normal'
             let itemWon = computer.deck.splice(0, 1)
             player.deck.push(itemWon[0])//splice returns an array, so you need to reference the 0 index of the array
             let sendEnd = player.deck.splice(0, 1)
@@ -132,7 +130,6 @@ function gameTurn() {
                     }
                 }
             } else {
-                gameCondition = 'normal'
                 console.log('player won hand')
                 let warWin = computer.deck.splice(0, 3)
                 for(let i = 0; i < warWin.length; i++) {
@@ -162,6 +159,7 @@ function gameTurn() {
         cardTally[1].innerText = `Card Count: ${player.cardCount}`
         console.log(`Computer: ${computer.cardCount}`)  
         console.log(`Player: ${player.cardCount}`)
+        console.log(gameCondition)
         if (player.cardCount === 0) {
             alert('Sorry, you lose!') 
             document.addEventListener('click', function () {
@@ -172,9 +170,9 @@ function gameTurn() {
             document.addEventListener('click', function() {
                 location.reload()
             })
-        } else if(gameCondition = 'war' && player.cardCount < 3) {
+        } else if(gameCondition ==='war' && player.cardCount < 2) {
             alert('Sorry, you don\'t have enough cards to continue, you lose!')
-        } else if(gameCondition = 'war' && computer.cardCount < 3) {
+        } else if(gameCondition === 'war' && computer.cardCount < 2) {
             alert('The computer does not have enough cards to continue, you win!!'
             )
         } 
