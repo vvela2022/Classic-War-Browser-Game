@@ -78,21 +78,27 @@ divyCards()
 //these lines will add functionality to the deck elemtents
 //modify funcion to be able to compare the values of the cards
 
+
+
 function gameTurn() {
+    let gameCondition = 'normal'
+  
     playerDeck.addEventListener('click', function () {
         playerDisplay.innerText = player.deck[0]
         computerDisplay.innerText = computer.deck[0]
         if(player.deck[0][0] > computer.deck[0][0]) {
+            gameCondition = 'normal'
             let itemWon = computer.deck.splice(0, 1)
             player.deck.push(itemWon[0])//splice returns an array, so you need to reference the 0 index of the array
             let sendEnd = player.deck.splice(0, 1)
             player.deck.push(sendEnd[0])
         } else if(computer.deck [0][0] === player.deck[0][0]) {
+            gameCondition = 'War'
             console.log('tie')
-            warCHide.innerText = computer.deck[1]
-            warCDisp.innerText = computer.deck[2]
-            warPHide.innerText = player.deck[1]
-            warPDisp.innerText = player.deck[2]
+                warCHide.innerText = computer.deck[1]
+                warCDisp.innerText = computer.deck[2]
+                warPHide.innerText = player.deck[1]
+                warPDisp.innerText = player.deck[2]    
             if(computer.deck[2][0] > player.deck[2][0]) {
                 console.log('computer won hand')
                 let warWin = player.deck.splice(0, 3)
@@ -103,7 +109,30 @@ function gameTurn() {
                 for (let j = 0; j < sendEnd.length; j++) {
                     computer.deck.push(sendEnd[j])
                 }
+            } else if (computer.deck[2][0] === player.deck[2][0]) {
+                if(computer.deck[4][0] > player.deck[4][0]) {
+                    console.log('computer won hand')
+                    let warWin = player.deck.splice(0,5)
+                    for(let i = 0; i < warWin.length; i++) {
+                        computer.deck.push(warWin[i])
+                    }
+                    let sendEnd = computer.deck.splice(0,5)
+                    for(let j = 0; j < sendEnd.length; j++) {
+                        computer.deck.push(sendEnd[j])
+                    }
+                } else {
+                    console.log('player won hand')
+                    let warWin = computer.deck.splice(0,5)
+                    for(let i = 0; i < warWin.length; i++) {
+                        player.deck.push(warWin[i])
+                    }
+                    let sendEnd = computer.deck.splice(0,5)
+                    for(let j = 0; j < sendEnd.length; j++) {
+                        player.deck.push(warWin[j])
+                    }
+                }
             } else {
+                gameCondition = 'normal'
                 console.log('player won hand')
                 let warWin = computer.deck.splice(0, 3)
                 for(let i = 0; i < warWin.length; i++) {
@@ -114,12 +143,13 @@ function gameTurn() {
                     player.deck.push(sendEnd[j])
                 }//build in additional logic for 2 or more ties
             }
-            playerDeck.addEventListener('click', function () {
-            warCHide.innerText = ""
-            warCDisp.innerText = ""
-            warPHide.innerText = ""
-            warPDisp.innerText = ""
-            })
+            //these lines are overriding tie cards from showing up
+            // playerDeck.addEventListener('click', function () {
+            // warCHide.innerText = ""
+            // warCDisp.innerText = ""
+            // warPHide.innerText = ""
+            // warPDisp.innerText = ""
+            // })
         } else {
             let itemWon = player.deck.splice(0, 1)
             computer.deck.push(itemWon[0])
@@ -132,8 +162,6 @@ function gameTurn() {
         cardTally[1].innerText = `Card Count: ${player.cardCount}`
         console.log(`Computer: ${computer.cardCount}`)  
         console.log(`Player: ${player.cardCount}`)
-        console.log(computer.deck)
-        console.log(player.deck)
         if (player.cardCount === 0) {
             alert('Sorry, you lose!') 
             document.addEventListener('click', function () {
@@ -144,7 +172,12 @@ function gameTurn() {
             document.addEventListener('click', function() {
                 location.reload()
             })
-        }
+        } else if(gameCondition = 'war' && player.cardCount < 3) {
+            alert('Sorry, you don\'t have enough cards to continue, you lose!')
+        } else if(gameCondition = 'war' && computer.cardCount < 3) {
+            alert('The computer does not have enough cards to continue, you win!!'
+            )
+        } 
     })
 }
   
