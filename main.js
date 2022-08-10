@@ -162,8 +162,9 @@ function gameTurn() {
         // cardTally[1].innerText = `Card Count: ${player.cardCount}`
         console.log(`Computer: ${computer.cardCount}`)  
         console.log(`Player: ${player.cardCount}`)
-        console.log(gameCondition)
         checkWin()
+        console.log(gameCondition)
+        setTimeout(clearBoard, 5000)
     })
 }
   
@@ -199,7 +200,7 @@ function updateScore() {
 }
 
 function checkWin() {
-    if (player.cardCount === 0) {
+    if (player.cardCount === 24) {
         gameCondition = 'over'
         hTag.innerText = 'Sorry, you lose!!'
         // document.addEventListener('click', function () {
@@ -223,4 +224,10 @@ function checkWin() {
     // } 
     
 }
+}
+
+function clearBoard() {
+    if(gameCondition === 'over') {
+        location.reload()
+    }
 }
