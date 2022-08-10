@@ -39,7 +39,7 @@ const hTag = document.querySelector('h1')
 let cardTypes = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 let suits = ['♥️', '♦️', '♣️', '♠️']//either replace w/ images or add image URLs to suits  
 
-
+let gameCondition = 'normal'
 //these lines created my master deck
 function createDeck() {
     for(let i = 0; i < cardTypes.length; i++) {
@@ -74,24 +74,20 @@ function divyCards () {
 
 divyCards()
 
-//these lines will add functionality to the deck elemtents
-//modify funcion to be able to compare the values of the cards
 
-
-
-
+//this is where gameplay happens
 function gameTurn() {
     playerDeck.addEventListener('click', function () {
         playerDisplay.innerText = player.deck[0]
         computerDisplay.innerText = computer.deck[0]
-        let gameCondition = 'normal'
+        gameCondition = 'normal'
         if(player.deck[0][0] > computer.deck[0][0]) {
             let itemWon = computer.deck.splice(0, 1)
             player.deck.push(itemWon[0])//splice returns an array, so you need to reference the 0 index of the array
             let sendEnd = player.deck.splice(0, 1)
             player.deck.push(sendEnd[0])
         } else if(computer.deck [0][0] === player.deck[0][0]) {
-            gameCondition = 'War'
+            
             initiateWar()
             setTimeout(clearWar, 2000)
             console.log('tie')
@@ -149,39 +145,42 @@ function gameTurn() {
         }
         player.cardCount = player.deck.length
         computer.cardCount = computer.deck.length
-        setTimeout(updateScore, 500)
+        setTimeout(updateScore, 1000)
         // cardTally[0].innerText = `Card Count: ${computer.cardCount}`
         // cardTally[1].innerText = `Card Count: ${player.cardCount}`
         console.log(`Computer: ${computer.cardCount}`)  
         console.log(`Player: ${player.cardCount}`)
         console.log(gameCondition)
-        if (player.cardCount === 0) {
-            //alert('Sorry, you lose!') 
-            hTag.innerText = 'Sorry, you lose!!'
-            // document.addEventListener('click', function () {
-            //    location.reload() 
-            // })
-        } else if (computer.cardCount === 0) {
-            //alert('You win!!')
-            hTag.innerText = 'You win!!'
+        checkWin()
+        // if (player.cardCount === 0) {
+        //     //alert('Sorry, you lose!') 
+        //     hTag.innerText = 'Sorry, you lose!!'
+        //     // document.addEventListener('click', function () {
+        //     //    location.reload() 
+        //     // })
+        // } else if (computer.cardCount === 0) {
+        //     //alert('You win!!')
+        //     hTag.innerText = 'You win!!'
             
-            // document.addEventListener('click', function() {
-            //     location.reload()
-            // })
-        } else if(gameCondition ==='war' && player.cardCount < 3) {
-            hTag.innerText = 'Sorry, you don\'t have enough cards to continue, you lose.'
-            // alert('Sorry, you don\'t have enough cards to continue, you lose!')
-        } else if(gameCondition === 'war' && computer.cardCount < 3) {
-            hTag.innerText = 'The computer does not have enough cards to continue, you win!!'
-            // alert('The computer does not have enough cards to continue, you win!!'
-            // )
-        } 
+        //     // document.addEventListener('click', function() {
+        //     //     location.reload()
+        //     // })
+        // } else if(gameCondition ==='war' && player.cardCount < 3) {
+        //     hTag.innerText = 'Sorry, you don\'t have enough cards to continue, you lose.'
+        //     // alert('Sorry, you don\'t have enough cards to continue, you lose!')
+        // } else if(gameCondition === 'war' && computer.cardCount < 3) {
+        //     hTag.innerText = 'The computer does not have enough cards to continue, you win!!'
+        //     // alert('The computer does not have enough cards to continue, you win!!'
+        //     // )
+        // } 
     })
 }
   
 gameTurn()
 
+
 function initiateWar() {
+    gameCondition = 'war'
     warCHide.style.backgroundColor = 'lightsteelblue'
     warCDisp.innerText = computer.deck[2]
     warPHide.style.backgroundColor = 'lightsteelblue'
@@ -189,6 +188,7 @@ function initiateWar() {
 }
 
 function clearWar() {
+    gameCondition = 'normal'
     warCHide.style.backgroundColor = 'darkgreen'
     warPHide.style.backgroundColor = 'darkgreen'
     warCDisp.innerText = ""
@@ -196,8 +196,32 @@ function clearWar() {
 }
 
 function updateScore() {
-    cardTally[0].innerText = `Card Count: ${computer.cardCount}`
-    cardTally[1].innerText = `Card Count: ${player.cardCount}`
+    cardTally[0].innerText = `Card count: ${computer.cardCount}`
+    cardTally[1].innerText = `Card count: ${player.cardCount}`
 }
+
+function checkWin() {
+    if (player.cardCount === 0) {
+        //alert('Sorry, you lose!') 
+        hTag.innerText = 'Sorry, you lose!!'
+        // document.addEventListener('click', function () {
+        //    location.reload() 
+        // })
+    } else if (computer.cardCount === 0) {
+        //alert('You win!!')
+        hTag.innerText = 'You win!!'
         
+        // document.addEventListener('click', function() {
+        //     location.reload()
+        // })
+    } else if(gameCondition ==='war' && player.cardCount < 3) {
+        hTag.innerText = 'Sorry, you don\'t have enough cards to continue, you lose.'
+        // alert('Sorry, you don\'t have enough cards to continue, you lose!')
+    } else if(gameCondition === 'war' && computer.cardCount < 3) {
+        hTag.innerText = 'The computer does not have enough cards to continue, you win!!'
+        // alert('The computer does not have enough cards to continue, you win!!'
+        // )
+    } 
+}
+
 //build in functionality to automatically reset after game is over
