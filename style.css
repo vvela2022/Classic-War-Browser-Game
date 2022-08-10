@@ -1,5 +1,5 @@
 .gameboard {
-    height: 750px;
+    height: 850px;
     max-width: 1000px;
     background-color: darkgreen;
     display: flex;
@@ -10,7 +10,7 @@
 }
 
 h1 {
-    color: white;
+    color: antiquewhite
 }
 
 .computer-space, .player-space, .computer-war, .player-war {
