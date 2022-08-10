@@ -25,7 +25,7 @@ const computer = {
 //DOM Elements below (what needs to be accessed/updated for user)
 let playerDeck = document.querySelector('#player-deck')//chain style to end of this element .style
 let playerDisplay = document.querySelector('#player-display')
-let computerDeck = document.querySelector('#computer-deck')
+// let computerDeck = document.querySelector('#computer-deck')
 let computerDisplay = document.querySelector('#computer-display')
 let resetButton = document.querySelector('button')
 let cardTally = document.querySelectorAll('.card-count')
@@ -88,13 +88,11 @@ function divyCards () {
 
 divyCards()
 
-console.log(player.deck)
-
 //this is where gameplay happens
 function gameTurn() {
     playerDeck.addEventListener('click', function () {
-        playerDisplay.innerText = player.deck[0]
-        computerDisplay.innerText = computer.deck[0]
+        playerDisplay.innerText = player.deck[0][0][1] + " " + player.deck[0][1]
+        computerDisplay.innerText = computer.deck[0][0][1] + " " + computer.deck[0][1]
         gameCondition = 'normal'
         if(player.deck[0][0][0] > computer.deck[0][0][0]) {
             let itemWon = computer.deck.splice(0, 1)
@@ -173,19 +171,26 @@ gameTurn()
 
 
 function initiateWar() {
-    gameCondition = 'war'
-    warCHide.style.backgroundColor = 'lightsteelblue'
-    warCDisp.innerText = computer.deck[2]
-    warPHide.style.backgroundColor = 'lightsteelblue'
-    warPDisp.innerText = player.deck[2]
+    if(player.cardCount < 3) {
+        hTag.innerText = 'Sorry, you don\'t have enough cards to continue, you lose.'
+    } else if(computer.cardCount < 3) {
+        hTag.innerText = 'The computer does not have enough cards to continue, you win!!'
+    } else {
+        gameCondition = 'war'
+        warCHide.style.backgroundColor = 'lightsteelblue'
+        warCDisp.innerText = computer.deck[2][0][1] + " " + computer.deck[2][1]
+        warPHide.style.backgroundColor = 'lightsteelblue'
+        warPDisp.innerText = player.deck[2][0][1] + " " + player.deck[2][1]
+    }
+    
 }
 
 function clearWar() {
-    gameCondition = 'normal'
-    warCHide.style.backgroundColor = 'darkgreen'
-    warPHide.style.backgroundColor = 'darkgreen'
-    warCDisp.innerText = ""
-    warPDisp.innerText = ""
+        gameCondition = 'normal'
+        warCHide.style.backgroundColor = 'darkgreen'
+        warPHide.style.backgroundColor = 'darkgreen'
+        warCDisp.innerText = ""
+        warPDisp.innerText = ""
 }
 
 function updateScore() {
@@ -195,24 +200,27 @@ function updateScore() {
 
 function checkWin() {
     if (player.cardCount === 0) {
+        gameCondition = 'over'
         hTag.innerText = 'Sorry, you lose!!'
         // document.addEventListener('click', function () {
         //    location.reload() 
         // })
     } else if (computer.cardCount === 0) {
+        gameCondition = 'over'
         hTag.innerText = 'You win!!'
-        
         // document.addEventListener('click', function() {
         //     location.reload()
         // })
-    } else if(gameCondition ==='war' && player.cardCount < 3) {
-        hTag.innerText = 'Sorry, you don\'t have enough cards to continue, you lose.'
-        // alert('Sorry, you don\'t have enough cards to continue, you lose!')
-    } else if(gameCondition === 'war' && computer.cardCount < 3) {
-        hTag.innerText = 'The computer does not have enough cards to continue, you win!!'
-        // alert('The computer does not have enough cards to continue, you win!!'
-        // )
-    } 
+    // } else if(gameCondition ==='war' && player.cardCount < 3) {
+    //     gameCondition = 'over'
+    //     hTag.innerText = 'Sorry, you don\'t have enough cards to continue, you lose.'
+    //     // alert('Sorry, you don\'t have enough cards to continue, you lose!')
+    // } else if(gameCondition === 'war' && computer.cardCount < 3) {
+    //     gameCondition = 'over'
+    //     hTag.innerText = 'The computer does not have enough cards to continue, you win!!'
+    //     // alert('The computer does not have enough cards to continue, you win!!'
+    //     // )
+    // } 
+    
 }
-
-//build in functionality to automatically reset after game is over
+}
