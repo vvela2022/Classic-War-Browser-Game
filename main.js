@@ -98,7 +98,7 @@ function gameTurn() {
         gameCondition = 'normal'
         if(player.deck[0][0][0] > computer.deck[0][0][0]) {
             let itemWon = computer.deck.splice(0, 1)
-            player.deck.push(itemWon[0])//splice returns an array, so you need to reference the 0 index of the array
+            player.deck.push(itemWon[0])
             let sendEnd = player.deck.splice(0, 1)
             player.deck.push(sendEnd[0])
         } else if(computer.deck [0][0][0] === player.deck[0][0][0]) {
@@ -149,7 +149,7 @@ function gameTurn() {
                 let sendEnd = player.deck.splice(0, 3)
                 for (let j = 0; j < sendEnd.length; j++) {
                     player.deck.push(sendEnd[j])
-                }//build in additional logic for 2 or more ties
+                }
             }
         } else {
             let itemWon = player.deck.splice(0, 1)
@@ -160,8 +160,6 @@ function gameTurn() {
         player.cardCount = player.deck.length
         computer.cardCount = computer.deck.length
         setTimeout(updateScore, 750)
-        // cardTally[0].innerText = `Card Count: ${computer.cardCount}`
-        // cardTally[1].innerText = `Card Count: ${player.cardCount}`
         console.log(`Computer: ${computer.cardCount}`)  
         console.log(`Player: ${player.cardCount}`)
         checkWin()
@@ -209,25 +207,9 @@ function checkWin() {
     if (player.cardCount === 0) {
         gameCondition = 'over'
         hTag.innerText = 'Sorry, you lose!!'
-        // document.addEventListener('click', function () {
-        //    location.reload() 
-        // })
     } else if (computer.cardCount === 0) {
         gameCondition = 'over'
         hTag.innerText = 'You win!!'
-        // document.addEventListener('click', function() {
-        //     location.reload()
-        // })
-    // } else if(gameCondition ==='war' && player.cardCount < 3) {
-    //     gameCondition = 'over'
-    //     hTag.innerText = 'Sorry, you don\'t have enough cards to continue, you lose.'
-    //     // alert('Sorry, you don\'t have enough cards to continue, you lose!')
-    // } else if(gameCondition === 'war' && computer.cardCount < 3) {
-    //     gameCondition = 'over'
-    //     hTag.innerText = 'The computer does not have enough cards to continue, you win!!'
-    //     // alert('The computer does not have enough cards to continue, you win!!'
-    //     // )
-    // } 
     
 }
 }
