@@ -92,8 +92,9 @@ function gameTurn() {
             player.deck.push(sendEnd[0])
         } else if(computer.deck [0][0] === player.deck[0][0]) {
             gameCondition = 'War'
-            console.log('tie')
             initiateWar()
+            setTimeout(clearWar, 2000)
+            console.log('tie')
             if(computer.deck[2][0] > player.deck[2][0]) {
                 console.log('computer won hand')
                 
@@ -105,9 +106,9 @@ function gameTurn() {
                 for (let j = 0; j < sendEnd.length; j++) {
                     computer.deck.push(sendEnd[j])
                 }
-                clearWar()
             } else if (computer.deck[2][0] === player.deck[2][0]) {
                 initiateWar()
+                setTimeout(clearWar, 2000)
                 if(computer.deck[4][0] > player.deck[4][0]) {
                     console.log('computer won hand')
                     let warWin = player.deck.splice(0,5)
@@ -129,7 +130,6 @@ function gameTurn() {
                         player.deck.push(warWin[j])
                     }
                 }
-                clearWar()
             } else {
                 console.log('player won hand')
                 let warWin = computer.deck.splice(0, 3)
@@ -141,7 +141,6 @@ function gameTurn() {
                     player.deck.push(sendEnd[j])
                 }//build in additional logic for 2 or more ties
             }
-            clearWar()
         } else {
             let itemWon = player.deck.splice(0, 1)
             computer.deck.push(itemWon[0])
@@ -189,12 +188,10 @@ function initiateWar() {
 }
 
 function clearWar() {
-    playerDeck.addEventListener('click', function () {
-        warCHide.innerText = ""
-        warCDisp.innerText = ""
-        warPHide.innerText = ""
-        warPDisp.innerText = ""
-    }) 
+    warCHide.style.backgroundColor = 'darkgreen'
+    warPHide.style.backgroundColor = 'darkgreen'
+    warCDisp.innerText = ""
+    warPDisp.innerText = ""
 }
 
 //build in functionality to automatically reset after game is over
