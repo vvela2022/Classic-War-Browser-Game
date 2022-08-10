@@ -149,8 +149,9 @@ function gameTurn() {
         }
         player.cardCount = player.deck.length
         computer.cardCount = computer.deck.length
-        cardTally[0].innerText = `Card Count: ${computer.cardCount}`
-        cardTally[1].innerText = `Card Count: ${player.cardCount}`
+        setTimeout(updateScore, 500)
+        // cardTally[0].innerText = `Card Count: ${computer.cardCount}`
+        // cardTally[1].innerText = `Card Count: ${player.cardCount}`
         console.log(`Computer: ${computer.cardCount}`)  
         console.log(`Player: ${player.cardCount}`)
         console.log(gameCondition)
@@ -194,4 +195,9 @@ function clearWar() {
     warPDisp.innerText = ""
 }
 
+function updateScore() {
+    cardTally[0].innerText = `Card Count: ${computer.cardCount}`
+    cardTally[1].innerText = `Card Count: ${player.cardCount}`
+}
+        
 //build in functionality to automatically reset after game is over
