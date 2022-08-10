@@ -37,7 +37,7 @@ const hTag = document.querySelector('h1')
 //populating master deck variable
 
 let beginDeck = []
-let cardTypes = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King', 'Ace']
+let cardTypes = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
 let suits = ['♥️', '♦️', '♣️', '♠️']//either replace w/ images or add image URLs to suits  
 let cardValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 
@@ -91,6 +91,8 @@ divyCards()
 //this is where gameplay happens
 function gameTurn() {
     playerDeck.addEventListener('click', function () {
+        playerDisplay.style.backgroundColor = 'black'
+        computerDisplay.style.backgroundColor = 'black'
         playerDisplay.innerText = player.deck[0][0][1] + " " + player.deck[0][1]
         computerDisplay.innerText = computer.deck[0][0][1] + " " + computer.deck[0][1]
         gameCondition = 'normal'
@@ -178,9 +180,11 @@ function initiateWar() {
         hTag.innerText = 'The computer does not have enough cards to continue, you win!!'
     } else {
         gameCondition = 'war'
-        warCHide.style.backgroundColor = 'lightsteelblue'
+        warCHide.style.backgroundColor = 'black'
+        warPHide.style.backgroundColor = 'black'
+        warCDisp.style.backgroundColor = 'black'
+        warPDisp.style.backgroundColor = 'black'
         warCDisp.innerText = computer.deck[2][0][1] + " " + computer.deck[2][1]
-        warPHide.style.backgroundColor = 'lightsteelblue'
         warPDisp.innerText = player.deck[2][0][1] + " " + player.deck[2][1]
     }
     
@@ -190,6 +194,8 @@ function clearWar() {
         gameCondition = 'normal'
         warCHide.style.backgroundColor = 'darkgreen'
         warPHide.style.backgroundColor = 'darkgreen'
+        warCDisp.style.backgroundColor = 'darkgreen'
+        warPDisp.style.backgroundColor = 'darkgreen'
         warCDisp.innerText = ""
         warPDisp.innerText = ""
 }

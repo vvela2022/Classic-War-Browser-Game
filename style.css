@@ -1,16 +1,24 @@
+body {
+    justify-content: center;
+    background-color: darkgreen;
+}
+
 .gameboard {
-    height: 850px;
-    max-width: 1000px;
+    max-height: 750px;
+    min-height: 750px;
+    max-width: 1920px;
     background-color: darkgreen;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
+    margin: auto;
 }
 
 h1 {
-    color: antiquewhite
+    color: antiquewhite;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .computer-space, .player-space, .computer-war, .player-war {
@@ -23,24 +31,49 @@ h1 {
 
 .deck, .face-up {
     height: 120px;
-    width: 100px;
-    background-color: lightsteelblue;
-    border: 2px solid black;
+    width: 90px;
+    background-color: black;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 10px;
+    border-radius: 4px;
+    font-size: 30px;
+    color: goldenrod;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+.face-up {
+    background-color: darkgreen;
 }
 
-.face-up {
-    background-color: lightcyan;
-}
+/* consider just activating this display when the game starts... */
+/* .face-up {
+    background-color: black
+} */
 
 .hidden-card, .hidden-display {
     height: 120px;
-    width: 100px;
+    width: 90px;
     margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: black; */
+    border-radius: 4px;
+    font-size: 30px;
+    color: goldenrod;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    
+    
 }
+
+/* consider just activating this display when the game starts... */
+/* .hidden-display {
+    background-color: black;
+} */
+
 
 .player-info {
     margin-left: 40px;
@@ -58,4 +91,15 @@ h1 {
 .card-count {
     margin-top: 5px;
     color: antiquewhite;
+}
+
+button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: darkgreen;
+    color:antiquewhite;
+    border-radius: 30px;
+    width: 75px;
+    height: 30px;
 }
