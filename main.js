@@ -200,7 +200,7 @@ function updateScore() {
 }
 
 function checkWin() {
-    if (player.cardCount === 24) {
+    if (player.cardCount === 0) {
         gameCondition = 'over'
         hTag.innerText = 'Sorry, you lose!!'
         // document.addEventListener('click', function () {
