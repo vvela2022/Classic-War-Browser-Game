@@ -159,14 +159,14 @@ function gameTurn() {
         }
         player.cardCount = player.deck.length
         computer.cardCount = computer.deck.length
-        setTimeout(updateScore, 1000)
+        setTimeout(updateScore, 750)
         // cardTally[0].innerText = `Card Count: ${computer.cardCount}`
         // cardTally[1].innerText = `Card Count: ${player.cardCount}`
         console.log(`Computer: ${computer.cardCount}`)  
         console.log(`Player: ${player.cardCount}`)
         checkWin()
         console.log(gameCondition)
-        setTimeout(clearBoard, 5000)
+        setTimeout(clearBoard, 10000)
     })
 }
   
@@ -192,10 +192,10 @@ function initiateWar() {
 
 function clearWar() {
         gameCondition = 'normal'
-        warCHide.style.backgroundColor = 'darkgreen'
-        warPHide.style.backgroundColor = 'darkgreen'
-        warCDisp.style.backgroundColor = 'darkgreen'
-        warPDisp.style.backgroundColor = 'darkgreen'
+        warCHide.style.backgroundColor = ''
+        warPHide.style.backgroundColor = ''
+        warCDisp.style.backgroundColor = ''
+        warPDisp.style.backgroundColor = ''
         warCDisp.innerText = ""
         warPDisp.innerText = ""
 }
