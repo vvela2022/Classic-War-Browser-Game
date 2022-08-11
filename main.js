@@ -1,4 +1,4 @@
-let masterDeck = []
+
 
 const player = {
     name: 'Player 1',
@@ -11,7 +11,6 @@ const computer = {
     deck: [],
     cardCount: 26
 }
-
 
 let playerDeck = document.querySelector('#player-deck')
 let playerDisplay = document.querySelector('#player-display')
@@ -26,6 +25,7 @@ let hTag = document.querySelector('h1')
 let useAlert = document.querySelector('#user-alert')
 
 let beginDeck = []
+let masterDeck = []
 let cardTypes = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
 let suits = ['♥️', '♦️', '♣️', '♠️']
 let cardValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
@@ -86,8 +86,8 @@ function gameTurn() {
         } else if(computer.deck [0][0][0] === player.deck[0][0][0]) {
             initiateWar()
             playerAlert()
-            setTimeout(clearAlert, 2500)
-            setTimeout(clearWar, 3000)
+            setTimeout(clearAlert, 2000)
+            setTimeout(clearWar, 2000)
             if(computer.deck[2][0][0] > player.deck[2][0][0]) {
                 computerAlert()
                 let warWin = player.deck.splice(0, 3)
@@ -101,8 +101,8 @@ function gameTurn() {
             } else if (computer.deck[2][0][0] === player.deck[2][0][0]) {
                 initiateWar()
                 playerAlert()
-                setTimeout(clearAlert, 2500)
-                setTimeout(clearWar, 3000)
+                setTimeout(clearAlert, 2000)
+                setTimeout(clearWar, 2000)
                 if(computer.deck[4][0][0] > player.deck[4][0][0]) {
                     let warWin = player.deck.splice(0,5)
                     for(let i = 0; i < warWin.length; i++) {
