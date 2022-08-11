@@ -1,13 +1,3 @@
-/*Global Variables
-Player {}
-Computer {}
-Master Card deck - contains an array of the cards and is shuffled and distributed to each player before start of the game
-Player Deck - contains the cards in the players deck
-(should be pushed to or pulled from depending on what happens during turn)
-player card count - contains the number of cards in the player's deck (should start at 26 and be incremented or decremented depending on turn outcome)
-Computer Deck - contains the cards in the computer's deck
-computer card count - contains the number of cards in the players deck
-*/
 let masterDeck = []
 
 const player = {
@@ -19,27 +9,25 @@ const player = {
 const computer = {
     name: 'Computer',
     deck: [],
-    cardCount: 26//use deck.length to update this amount
+    cardCount: 26
 }
 
-//DOM Elements below (what needs to be accessed/updated for user)
-let playerDeck = document.querySelector('#player-deck')//chain style to end of this element .style
+
+let playerDeck = document.querySelector('#player-deck')
 let playerDisplay = document.querySelector('#player-display')
-// let computerDeck = document.querySelector('#computer-deck')
 let computerDisplay = document.querySelector('#computer-display')
 let resetButton = document.querySelector('button')
 let cardTally = document.querySelectorAll('.card-count')
 let warCHide = document.querySelector('#computer-hidden')
-let warCDisp = document.querySelector('#computer-war-display')//could I make these lines better? Loop to assign values?
+let warCDisp = document.querySelector('#computer-war-display')
 let warPHide = document.querySelector('#player-hidden')
 let warPDisp = document.querySelector('#player-war-display')
-const hTag = document.querySelector('h1')
-const useAlert = document.querySelector('#user-alert')
-//populating master deck variable
+let hTag = document.querySelector('h1')
+let useAlert = document.querySelector('#user-alert')
 
 let beginDeck = []
 let cardTypes = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
-let suits = ['♥️', '♦️', '♣️', '♠️']//either replace w/ images or add image URLs to suits  
+let suits = ['♥️', '♦️', '♣️', '♠️']
 let cardValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 
 let gameCondition = 'normal'
@@ -53,8 +41,6 @@ function initialDeck() {
 
 initialDeck()
 
-
-//these lines created my master deck
 function createDeck() {
     for(let i = 0; i < beginDeck.length; i++) {
         for(let j = 0; j < suits.length; j++) {
@@ -66,22 +52,16 @@ function createDeck() {
 
 createDeck()
 
-//this activates my reset button
 resetButton.addEventListener('click', function () {
     location.reload()
 })
 
-
-//this shuffles my master deck
 function deckShuffle(deck) {
     deck.sort(() => Math.random() - 0.5)
 }
 
 deckShuffle(masterDeck)
 
-//add additional value to the inner array at index 2
-
-//these lines will distributes 26 cards to each player
 function divyCards () {
     player.deck = masterDeck.splice(0, 26)
     computer.deck = masterDeck.splice(0,26)
@@ -89,7 +69,6 @@ function divyCards () {
 
 divyCards()
 
-//this is where gameplay happens
 function gameTurn() {
     playerDeck.addEventListener('click', function () {
         playerDisplay.style.backgroundColor = 'black'
@@ -183,7 +162,6 @@ function gameTurn() {
   
 gameTurn()
 
-
 function initiateWar() {
     if(player.cardCount < 3) {
         hTag.innerText = 'Sorry, you don\'t have enough cards to continue, you lose.'
@@ -237,20 +215,6 @@ function clearAlert () {
 
 function updateScore() {
     if (gameCondition === 'normal' || 'war') {
-        // if (computer.deck[4][0][0] > player.deck[4][0][0]) {
-        //     useAlert.innerText = 'Computer wins hand.'
-        // } else if (computer.deck[0][0][0] > player.deck[0][0][0]) {
-        //     useAlert.innerText = 'Computer wins hand.'
-        // } else if (computer.deck[2][0][0] > player.deck[2][0][0]) {
-        //     useAlert.innerText = 'Computer wins hand.'
-        // } else if (computer.deck [0][0][0] === player.deck[0][0][0]) {
-        //     useAlert.innerText = 'War!'
-        // } else if (computer.deck[2][0][0] === player.deck[2][0][0]) {
-        //     useAlert.innerText = 'War!'
-        // } else if (computer.deck[4][0][0] === player.deck[4][0][0]) {
-        //     useAlert.innerText = 'War!'
-        // } else {
-        //     useAlert.innerText = 'Player wins hand!'
         cardTally[0].innerText = `Card count: ${computer.cardCount}`
         cardTally[1].innerText = `Card count: ${player.cardCount}`
         }
