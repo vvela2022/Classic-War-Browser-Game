@@ -1,4 +1,4 @@
-
+let masterDeck = []
 
 const player = {
     name: 'Player 1',
@@ -12,6 +12,7 @@ const computer = {
     cardCount: 26
 }
 
+
 let playerDeck = document.querySelector('#player-deck')
 let playerDisplay = document.querySelector('#player-display')
 let computerDisplay = document.querySelector('#computer-display')
@@ -21,11 +22,11 @@ let warCHide = document.querySelector('#computer-hidden')
 let warCDisp = document.querySelector('#computer-war-display')
 let warPHide = document.querySelector('#player-hidden')
 let warPDisp = document.querySelector('#player-war-display')
-let hTag = document.querySelector('h1')
-let useAlert = document.querySelector('#user-alert')
+const hTag = document.querySelector('h1')
+const useAlert = document.querySelector('#user-alert')
+
 
 let beginDeck = []
-let masterDeck = []
 let cardTypes = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
 let suits = ['♥️', '♦️', '♣️', '♠️']
 let cardValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
@@ -41,6 +42,8 @@ function initialDeck() {
 
 initialDeck()
 
+
+
 function createDeck() {
     for(let i = 0; i < beginDeck.length; i++) {
         for(let j = 0; j < suits.length; j++) {
@@ -52,9 +55,12 @@ function createDeck() {
 
 createDeck()
 
+
 resetButton.addEventListener('click', function () {
     location.reload()
 })
+
+
 
 function deckShuffle(deck) {
     deck.sort(() => Math.random() - 0.5)
@@ -63,19 +69,20 @@ function deckShuffle(deck) {
 deckShuffle(masterDeck)
 
 function divyCards () {
-    player.deck = masterDeck.splice(0, 26)
-    computer.deck = masterDeck.splice(0,26)
+    player.deck = masterDeck.splice(0, 5)
+    computer.deck = masterDeck.splice(0,5)
 }
 
 divyCards()
 
+
 function gameTurn() {
     playerDeck.addEventListener('click', function () {
-    playerDisplay.style.backgroundColor = 'black'
-    computerDisplay.style.backgroundColor = 'black'
-    playerDisplay.innerText = player.deck[0][0][1] + " " + player.deck[0][1]
-    computerDisplay.innerText = computer.deck[0][0][1] + " " + computer.deck[0][1]
-    gameCondition = 'normal'
+        playerDisplay.style.backgroundColor = 'black'
+        computerDisplay.style.backgroundColor = 'black'
+        playerDisplay.innerText = player.deck[0][0][1] + " " + player.deck[0][1]
+        computerDisplay.innerText = computer.deck[0][0][1] + " " + computer.deck[0][1]
+        gameCondition = 'normal'
         if(player.deck[0][0][0] > computer.deck[0][0][0]) {
             playerAlert()
             setTimeout(clearAlert, 2000)
@@ -86,10 +93,12 @@ function gameTurn() {
         } else if(computer.deck [0][0][0] === player.deck[0][0][0]) {
             initiateWar()
             playerAlert()
-            setTimeout(clearAlert, 2000)
-            setTimeout(clearWar, 2000)
+            setTimeout(clearAlert, 2500)
+            setTimeout(clearWar, 3000)
+            console.log('tie')
             if(computer.deck[2][0][0] > player.deck[2][0][0]) {
                 computerAlert()
+                console.log('computer won hand')
                 let warWin = player.deck.splice(0, 3)
                 for(let i = 0; i < warWin.length; i++) {
                     computer.deck.push(warWin[i])
@@ -101,9 +110,10 @@ function gameTurn() {
             } else if (computer.deck[2][0][0] === player.deck[2][0][0]) {
                 initiateWar()
                 playerAlert()
-                setTimeout(clearAlert, 2000)
-                setTimeout(clearWar, 2000)
+                setTimeout(clearAlert, 2500)
+                setTimeout(clearWar, 3000)
                 if(computer.deck[4][0][0] > player.deck[4][0][0]) {
+                    console.log('computer won hand')
                     let warWin = player.deck.splice(0,5)
                     for(let i = 0; i < warWin.length; i++) {
                         computer.deck.push(warWin[i])
@@ -115,6 +125,7 @@ function gameTurn() {
                 } else {
                     playerAlert()
                     setTimeout(clearAlert, 2000)
+                    console.log('player won hand')
                     let warWin = computer.deck.splice(0,5)
                     for(let i = 0; i < warWin.length; i++) {
                         player.deck.push(warWin[i])
@@ -127,6 +138,7 @@ function gameTurn() {
             } else {
                 playerAlert()
                 setTimeout(clearAlert, 2000)
+                console.log('player won hand')
                 let warWin = computer.deck.splice(0, 3)
                 for(let i = 0; i < warWin.length; i++) {
                     player.deck.push(warWin[i])
@@ -147,17 +159,24 @@ function gameTurn() {
         player.cardCount = player.deck.length
         computer.cardCount = computer.deck.length
         setTimeout(updateScore, 500)
+        console.log(`Computer: ${computer.cardCount}`)  
+        console.log(`Player: ${player.cardCount}`)
         setTimeout(checkWin, 6000)
+        console.log(gameCondition)
+        setTimeout(clearBoard, 10000)
     })
 }
   
 gameTurn()
 
+
 function initiateWar() {
     if(player.cardCount < 3) {
-        useAlert.innerText = 'Sorry, you don\'t have enough cards to continue, you lose.'
+        hTag.innerText = 'Sorry, you don\'t have enough cards to continue, you lose.'
+        gameCondition = 'over'
     } else if(computer.cardCount < 3) {
-        useAlert.innerText = 'The computer does not have enough cards to continue, you win!!'
+        hTag.innerText = 'The computer does not have enough cards to continue, you win!!'
+        gameCondition = 'over'
     } else {
         gameCondition = 'war'
         warCHide.style.backgroundColor = 'black'
@@ -171,13 +190,13 @@ function initiateWar() {
 }
 
 function clearWar() {
-    gameCondition = 'normal'
-    warCHide.style.backgroundColor = ''
-    warPHide.style.backgroundColor = ''
-    warCDisp.style.backgroundColor = ''
-    warPDisp.style.backgroundColor = ''
-    warCDisp.innerText = ""
-    warPDisp.innerText = ""
+        gameCondition = 'normal'
+        warCHide.style.backgroundColor = ''
+        warPHide.style.backgroundColor = ''
+        warCDisp.style.backgroundColor = ''
+        warPDisp.style.backgroundColor = ''
+        warCDisp.innerText = ""
+        warPDisp.innerText = ""
 }
 
 function playerAlert() {
@@ -208,8 +227,8 @@ function updateScore() {
     if (gameCondition === 'normal' || 'war') {
         cardTally[0].innerText = `Card count: ${computer.cardCount}`
         cardTally[1].innerText = `Card count: ${player.cardCount}`
+        }
     }
-}
 
 function checkWin() {
     if (player.cardCount === 0) {
@@ -219,5 +238,11 @@ function checkWin() {
         gameCondition = 'over'
         useAlert.innerText = 'You win!!'
     
+}
+}
+
+function clearBoard() {
+    if(gameCondition === 'over') {
+        location.reload()
     }
 }
