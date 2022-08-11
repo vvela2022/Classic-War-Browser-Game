@@ -71,11 +71,11 @@ divyCards()
 
 function gameTurn() {
     playerDeck.addEventListener('click', function () {
-        playerDisplay.style.backgroundColor = 'black'
-        computerDisplay.style.backgroundColor = 'black'
-        playerDisplay.innerText = player.deck[0][0][1] + " " + player.deck[0][1]
-        computerDisplay.innerText = computer.deck[0][0][1] + " " + computer.deck[0][1]
-        gameCondition = 'normal'
+    playerDisplay.style.backgroundColor = 'black'
+    computerDisplay.style.backgroundColor = 'black'
+    playerDisplay.innerText = player.deck[0][0][1] + " " + player.deck[0][1]
+    computerDisplay.innerText = computer.deck[0][0][1] + " " + computer.deck[0][1]
+    gameCondition = 'normal'
         if(player.deck[0][0][0] > computer.deck[0][0][0]) {
             playerAlert()
             setTimeout(clearAlert, 2000)
@@ -148,7 +148,6 @@ function gameTurn() {
         computer.cardCount = computer.deck.length
         setTimeout(updateScore, 500)
         setTimeout(checkWin, 6000)
-        // setTimeout(clearBoard, 10000)
     })
 }
   
@@ -172,13 +171,13 @@ function initiateWar() {
 }
 
 function clearWar() {
-        gameCondition = 'normal'
-        warCHide.style.backgroundColor = ''
-        warPHide.style.backgroundColor = ''
-        warCDisp.style.backgroundColor = ''
-        warPDisp.style.backgroundColor = ''
-        warCDisp.innerText = ""
-        warPDisp.innerText = ""
+    gameCondition = 'normal'
+    warCHide.style.backgroundColor = ''
+    warPHide.style.backgroundColor = ''
+    warCDisp.style.backgroundColor = ''
+    warPDisp.style.backgroundColor = ''
+    warCDisp.innerText = ""
+    warPDisp.innerText = ""
 }
 
 function playerAlert() {
@@ -209,8 +208,8 @@ function updateScore() {
     if (gameCondition === 'normal' || 'war') {
         cardTally[0].innerText = `Card count: ${computer.cardCount}`
         cardTally[1].innerText = `Card count: ${player.cardCount}`
-        }
     }
+}
 
 function checkWin() {
     if (player.cardCount === 0) {
@@ -220,11 +219,5 @@ function checkWin() {
         gameCondition = 'over'
         useAlert.innerText = 'You win!!'
     
-}
-}
-
-function clearBoard() {
-    if(gameCondition === 'over') {
-        location.reload()
     }
 }
