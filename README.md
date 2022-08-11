@@ -22,7 +22,7 @@ Note - this game version has two war scenarios built in.
 ![War Play](Assets/War-play.png)
 - A message is displayed after each hand who is the winner or in this case, if it is War
 ![Win Screen](Assets/Win-screen.png)
-- When won either the player or the computer has all 52 cards, a win or lose message is displayed.
+- Game is won either the player or the computer has all 52 cards, a win or lose message is displayed depending on winner.
 
 ## Technologies Used
 - JavaScript
