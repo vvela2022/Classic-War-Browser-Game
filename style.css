@@ -5,7 +5,8 @@ body {
     background-image: url('Assets/background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
 }
 
 .gameboard {
@@ -74,6 +75,12 @@ h1 {
 .user-notify {
     color: whitesmoke;
     font-size: 20px;
+    text-align: center;
+    font-style: italic;
+    width: 200px;
+    height: 30px;
+    margin-left: 40px;
+    margin-top: 100px;
 }
 
 /* consider just activating this display when the game starts... */
@@ -90,16 +97,16 @@ h1 {
 
 .players {
     font-size: 18px;
-    font-weight: bold;
     color: whitesmoke;
     margin-bottom: 0px;
-    text-align: center;
+    text-align: left;
 }
 
 .card-count {
     margin-top: 5px;
     color: whitesmoke;
-    text-align: center;
+    text-align: left;
+    font-size: 14px;
 }
 
 button {
