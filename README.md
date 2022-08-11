@@ -9,11 +9,11 @@ Play continues until there is one player with all 52 cards. The game ends when o
 Note - this game version has two war scenarios built in.
 
 ## Planning
-# Wire Frame
+### Wire Frame
 ![Wireframe](Assets/Wireframe.jpg)
 
 ## Game Functionality
-# Screenshots
+### Screenshots
 ![Start Screen](Assets/start-screen.png)
 ![Main Play](Assets/Main-Play.png)
 ![War Play](Assets/War-play.png)
