@@ -34,6 +34,7 @@ let warCDisp = document.querySelector('#computer-war-display')//could I make the
 let warPHide = document.querySelector('#player-hidden')
 let warPDisp = document.querySelector('#player-war-display')
 const hTag = document.querySelector('h1')
+const useAlert = document.querySelector('#user-alert')
 //populating master deck variable
 
 let beginDeck = []
@@ -97,17 +98,21 @@ function gameTurn() {
         computerDisplay.innerText = computer.deck[0][0][1] + " " + computer.deck[0][1]
         gameCondition = 'normal'
         if(player.deck[0][0][0] > computer.deck[0][0][0]) {
+            playerAlert()
+            setTimeout(clearAlert, 2000)
             let itemWon = computer.deck.splice(0, 1)
             player.deck.push(itemWon[0])
             let sendEnd = player.deck.splice(0, 1)
             player.deck.push(sendEnd[0])
         } else if(computer.deck [0][0][0] === player.deck[0][0][0]) {
             initiateWar()
-            setTimeout(clearWar, 2000)
+            playerAlert()
+            setTimeout(clearAlert, 2500)
+            setTimeout(clearWar, 3000)
             console.log('tie')
             if(computer.deck[2][0][0] > player.deck[2][0][0]) {
+                computerAlert()
                 console.log('computer won hand')
-                
                 let warWin = player.deck.splice(0, 3)
                 for(let i = 0; i < warWin.length; i++) {
                     computer.deck.push(warWin[i])
@@ -118,7 +123,9 @@ function gameTurn() {
                 }
             } else if (computer.deck[2][0][0] === player.deck[2][0][0]) {
                 initiateWar()
-                setTimeout(clearWar, 2000)
+                playerAlert()
+                setTimeout(clearAlert, 2500)
+                setTimeout(clearWar, 3000)
                 if(computer.deck[4][0][0] > player.deck[4][0][0]) {
                     console.log('computer won hand')
                     let warWin = player.deck.splice(0,5)
@@ -130,6 +137,8 @@ function gameTurn() {
                         computer.deck.push(sendEnd[j])
                     }
                 } else {
+                    playerAlert()
+                    setTimeout(clearAlert, 2000)
                     console.log('player won hand')
                     let warWin = computer.deck.splice(0,5)
                     for(let i = 0; i < warWin.length; i++) {
@@ -141,6 +150,8 @@ function gameTurn() {
                     }
                 }
             } else {
+                playerAlert()
+                setTimeout(clearAlert, 2000)
                 console.log('player won hand')
                 let warWin = computer.deck.splice(0, 3)
                 for(let i = 0; i < warWin.length; i++) {
@@ -152,6 +163,8 @@ function gameTurn() {
                 }
             }
         } else {
+            computerAlert()
+            setTimeout(clearAlert, 2000)
             let itemWon = player.deck.splice(0, 1)
             computer.deck.push(itemWon[0])
             let sendEnd = computer.deck.splice(0, 1)
@@ -159,10 +172,10 @@ function gameTurn() {
         }
         player.cardCount = player.deck.length
         computer.cardCount = computer.deck.length
-        setTimeout(updateScore, 750)
+        setTimeout(updateScore, 500)
         console.log(`Computer: ${computer.cardCount}`)  
         console.log(`Player: ${player.cardCount}`)
-        checkWin()
+        setTimeout(checkWin, 6000)
         console.log(gameCondition)
         setTimeout(clearBoard, 10000)
     })
@@ -198,18 +211,58 @@ function clearWar() {
         warPDisp.innerText = ""
 }
 
-function updateScore() {
-    cardTally[0].innerText = `Card count: ${computer.cardCount}`
-    cardTally[1].innerText = `Card count: ${player.cardCount}`
+function playerAlert() {
+    if(gameCondition === 'normal') {
+        useAlert.innerText = 'Player wins hand!'
+    } else if (gameCondition === 'war') {
+        useAlert.innerText = 'War!'
+    } else {
+        useAlert.innerText = ""
+    }
+}   
+
+function computerAlert() {
+    if(gameCondition === 'normal') {
+        useAlert.innerText = 'Computer wins hand.'
+    } else if (gameCondition === 'war') {
+        useAlert.innerText = 'War!'
+    } else {
+        useAlert.innerText = ""
+    }
 }
+
+function clearAlert () {
+    useAlert.innerText = ""
+}
+
+function updateScore() {
+    if (gameCondition === 'normal' || 'war') {
+        // if (computer.deck[4][0][0] > player.deck[4][0][0]) {
+        //     useAlert.innerText = 'Computer wins hand.'
+        // } else if (computer.deck[0][0][0] > player.deck[0][0][0]) {
+        //     useAlert.innerText = 'Computer wins hand.'
+        // } else if (computer.deck[2][0][0] > player.deck[2][0][0]) {
+        //     useAlert.innerText = 'Computer wins hand.'
+        // } else if (computer.deck [0][0][0] === player.deck[0][0][0]) {
+        //     useAlert.innerText = 'War!'
+        // } else if (computer.deck[2][0][0] === player.deck[2][0][0]) {
+        //     useAlert.innerText = 'War!'
+        // } else if (computer.deck[4][0][0] === player.deck[4][0][0]) {
+        //     useAlert.innerText = 'War!'
+        // } else {
+        //     useAlert.innerText = 'Player wins hand!'
+        cardTally[0].innerText = `Card count: ${computer.cardCount}`
+        cardTally[1].innerText = `Card count: ${player.cardCount}`
+        }
+    }
 
 function checkWin() {
     if (player.cardCount === 0) {
         gameCondition = 'over'
-        hTag.innerText = 'Sorry, you lose!!'
+        useAlert.innerText = 'Sorry, you lose!!'
     } else if (computer.cardCount === 0) {
         gameCondition = 'over'
-        hTag.innerText = 'You win!!'
+        useAlert.innerText = 'You win!!'
     
 }
 }

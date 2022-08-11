@@ -68,8 +68,12 @@ h1 {
     color: goldenrod;
     font-family:Georgia, 'Times New Roman', Times, serif;
     font-style: italic;
-    
-    
+      
+}
+
+.user-notify {
+    color: whitesmoke;
+    font-size: 20px;
 }
 
 /* consider just activating this display when the game starts... */
