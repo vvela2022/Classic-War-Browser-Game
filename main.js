@@ -88,10 +88,8 @@ function gameTurn() {
             playerAlert()
             setTimeout(clearAlert, 2500)
             setTimeout(clearWar, 3000)
-            console.log('tie')
             if(computer.deck[2][0][0] > player.deck[2][0][0]) {
                 computerAlert()
-                console.log('computer won hand')
                 let warWin = player.deck.splice(0, 3)
                 for(let i = 0; i < warWin.length; i++) {
                     computer.deck.push(warWin[i])
@@ -106,7 +104,6 @@ function gameTurn() {
                 setTimeout(clearAlert, 2500)
                 setTimeout(clearWar, 3000)
                 if(computer.deck[4][0][0] > player.deck[4][0][0]) {
-                    console.log('computer won hand')
                     let warWin = player.deck.splice(0,5)
                     for(let i = 0; i < warWin.length; i++) {
                         computer.deck.push(warWin[i])
@@ -118,7 +115,6 @@ function gameTurn() {
                 } else {
                     playerAlert()
                     setTimeout(clearAlert, 2000)
-                    console.log('player won hand')
                     let warWin = computer.deck.splice(0,5)
                     for(let i = 0; i < warWin.length; i++) {
                         player.deck.push(warWin[i])
@@ -131,7 +127,6 @@ function gameTurn() {
             } else {
                 playerAlert()
                 setTimeout(clearAlert, 2000)
-                console.log('player won hand')
                 let warWin = computer.deck.splice(0, 3)
                 for(let i = 0; i < warWin.length; i++) {
                     player.deck.push(warWin[i])
@@ -152,10 +147,7 @@ function gameTurn() {
         player.cardCount = player.deck.length
         computer.cardCount = computer.deck.length
         setTimeout(updateScore, 500)
-        console.log(`Computer: ${computer.cardCount}`)  
-        console.log(`Player: ${player.cardCount}`)
         setTimeout(checkWin, 6000)
-        console.log(gameCondition)
         setTimeout(clearBoard, 10000)
     })
 }

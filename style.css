@@ -18,7 +18,6 @@ body {
     flex-wrap: wrap;
     align-items: center;
     gap: 0px;
-    /* justify-content: space-around; */
     margin-top: 50px;
 }
 
@@ -36,7 +35,6 @@ h1 {
 .deck, .face-up {
     height: 120px;
     width: 90px;
-    /* background-color: black; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,11 +48,6 @@ h1 {
  .deck {
     background-color: black;
 } 
-
-/* consider just activating this display when the game starts... */
-/* .face-up {
-    background-color: black
-} */
 
 .hidden-card, .hidden-display {
     height: 120px;
@@ -82,12 +75,6 @@ h1 {
     margin-left: 40px;
     margin-top: 100px;
 }
-
-/* consider just activating this display when the game starts... */
-/* .hidden-display {
-    background-color: black;
-} */
-
 
 .player-info {
     margin-left: 40px;
