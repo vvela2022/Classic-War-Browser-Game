@@ -148,7 +148,7 @@ function gameTurn() {
         computer.cardCount = computer.deck.length
         setTimeout(updateScore, 500)
         setTimeout(checkWin, 6000)
-        setTimeout(clearBoard, 10000)
+        // setTimeout(clearBoard, 10000)
     })
 }
   
@@ -156,9 +156,9 @@ gameTurn()
 
 function initiateWar() {
     if(player.cardCount < 3) {
-        hTag.innerText = 'Sorry, you don\'t have enough cards to continue, you lose.'
+        useAlert.innerText = 'Sorry, you don\'t have enough cards to continue, you lose.'
     } else if(computer.cardCount < 3) {
-        hTag.innerText = 'The computer does not have enough cards to continue, you win!!'
+        useAlert.innerText = 'The computer does not have enough cards to continue, you win!!'
     } else {
         gameCondition = 'war'
         warCHide.style.backgroundColor = 'black'
