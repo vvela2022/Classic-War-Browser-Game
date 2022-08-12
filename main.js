@@ -76,6 +76,7 @@ function divyCards () {
 divyCards()
 
 
+
 function gameTurn() {
     playerDeck.addEventListener('click', function () {
         playerDisplay.style.backgroundColor = 'black'

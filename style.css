@@ -49,6 +49,23 @@ h1 {
     background-color: black;
 } 
 
+.card-design {
+    height: 100px;
+    width: 70px;
+    border: goldenrod 1px solid;
+    color: goldenrod;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    width: 50px;
+    text-align: center;
+    font-size: 25px;
+
+}
+
 .hidden-card, .hidden-display {
     height: 120px;
     width: 90px;
