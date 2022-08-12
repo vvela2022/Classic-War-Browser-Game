@@ -72,8 +72,8 @@ function deckShuffle(deck) {
 deckShuffle(masterDeck)
 
 function divyCards () {
-    player.deck = masterDeck.splice(0, 5)
-    computer.deck = masterDeck.splice(0, 5)
+    player.deck = masterDeck.splice(0, 26)
+    computer.deck = masterDeck.splice(0, 26)
 }
 
 divyCards()
@@ -176,7 +176,7 @@ function initiateWar() {
         gameCondition = 'over'
     } else {
         gameCondition = 'war'
-        warCHide.style.backgroundColor = 'black'//♥️ ♦️ ♣️ ♠️
+        warCHide.style.backgroundColor = 'black'
         warPHide.style.backgroundColor = 'black'
         warCDisp.style.backgroundColor = 'black'
         warPDisp.style.backgroundColor = 'black'
