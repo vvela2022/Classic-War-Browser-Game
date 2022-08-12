@@ -72,8 +72,8 @@ function deckShuffle(deck) {
 deckShuffle(masterDeck)
 
 function divyCards () {
-    player.deck = masterDeck.splice(0, 26)
-    computer.deck = masterDeck.splice(0, 26)
+    player.deck = masterDeck.splice(0, 5)
+    computer.deck = masterDeck.splice(0, 5)
 }
 
 divyCards()
